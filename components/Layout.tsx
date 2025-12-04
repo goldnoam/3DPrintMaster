@@ -59,6 +59,22 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTa
         {children}
       </main>
 
+      {/* Footer */}
+      <footer className="bg-slate-100 py-8 border-t border-slate-200 mt-auto mb-16 md:mb-0">
+        <div className="container mx-auto px-4 text-center">
+            <p className="text-slate-600 font-medium mb-2">(C) Noam Gold AI 2025</p>
+            <a 
+                href="mailto:gold.noam@gmail.com" 
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline transition-colors text-sm"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Send Feedback
+            </a>
+        </div>
+      </footer>
+
       {/* Mobile Bottom Navigation */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 flex justify-around py-3 pb-safe">
          <button onClick={() => setActiveTab(Tab.HOME)} className={`flex flex-col items-center ${activeTab === Tab.HOME ? 'text-blue-600' : 'text-gray-500'}`}>

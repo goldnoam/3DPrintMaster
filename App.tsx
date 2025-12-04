@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from './components/Layout';
 import { Hero } from './components/Hero';
 import { CourseView } from './components/CourseView';
@@ -10,11 +10,23 @@ const ProjectsView: React.FC<{ onNavigateToTutor: () => void }> = ({ onNavigateT
     const [filter, setFilter] = useState<string>('all');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [sortOrder, setSortOrder] = useState<string>('default');
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    // Simulate loading effect
+    useEffect(() => {
+        setIsLoading(true);
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 500); // 500ms fake loading time
+        return () => clearTimeout(timer);
+    }, [filter, searchQuery, sortOrder]);
 
     const categories = [
         { id: 'all', label: 'הכל' },
         { id: 'home', label: 'לבית' },
+        { id: 'gadgets', label: 'גאדג\'טים' },
         { id: 'toys', label: 'צעצועים' },
+        { id: 'educational', label: 'חינוך' },
         { id: 'parts', label: 'חלקים ותיקונים' },
         { id: 'art', label: 'אומנות ועיצוב' },
     ];
@@ -163,6 +175,87 @@ const ProjectsView: React.FC<{ onNavigateToTutor: () => void }> = ({ onNavigateT
             desc: 'ארגונית קטנה למטבעות ברכב או בבית.', 
             img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Coin+Holder',
             link: 'https://www.printables.com/search/models?q=coin%20holder'
+        },
+        { 
+            id: 17, 
+            title: 'עציץ גיאומטרי', 
+            category: 'art', 
+            difficulty: 'קל',
+            desc: 'עציץ בעיצוב מודרני לצמחים קטנים (סוקולנטים).', 
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Geometric+Planter',
+            link: 'https://www.printables.com/search/models?q=geometric%20planter'
+        },
+        { 
+            id: 18, 
+            title: 'ספינר חשבוני', 
+            category: 'educational', 
+            difficulty: 'קל',
+            desc: 'כלי לימודי מהנה לתרגול פעולות חשבון בסיסיות.', 
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Math+Spinner',
+            link: 'https://www.printables.com/search/models?q=math%20spinner'
+        },
+        { 
+            id: 19, 
+            title: 'מעמד לאוזניות', 
+            category: 'gadgets', 
+            difficulty: 'בינוני',
+            desc: 'מעמד שולחני להנחת אוזניות קשת.', 
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Headphone+Stand',
+            link: 'https://www.printables.com/search/models?q=headphone%20stand'
+        },
+        { 
+            id: 20, 
+            title: 'מודל DNA', 
+            category: 'educational', 
+            difficulty: 'בינוני',
+            desc: 'מודל מדעי להרכבה הממחיש את מבנה ה-DNA.', 
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=DNA+Model',
+            link: 'https://www.printables.com/search/models?q=dna%20model'
+        },
+        {
+            id: 21,
+            title: 'מעמד ללפטופ',
+            category: 'gadgets',
+            difficulty: 'קל',
+            desc: 'זוג רגליות להגבהת המחשב הנייד לזרימת אוויר טובה יותר.',
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Laptop+Stand',
+            link: 'https://www.printables.com/search/models?q=laptop%20stand%20simple'
+        },
+        {
+            id: 22,
+            title: 'ארגונית לשולחן',
+            category: 'home',
+            difficulty: 'קל',
+            desc: 'קופסה מחולקת לעטים, עפרונות וציוד משרדי.',
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Desk+Organizer',
+            link: 'https://www.printables.com/search/models?q=desk%20organizer'
+        },
+        {
+            id: 23,
+            title: 'מתלה לקיר (Wall Hook)',
+            category: 'home',
+            difficulty: 'קל',
+            desc: 'וו תלייה חזק למגבות או מעילים, ניתן להדבקה.',
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Wall+Hook',
+            link: 'https://www.printables.com/search/models?q=wall%20hook'
+        },
+        {
+            id: 24,
+            title: 'קופסה עם מכסה',
+            category: 'home',
+            difficulty: 'בינוני',
+            desc: 'קופסה עם מכסה מוברג או נצמד, שימושי לאחסון.',
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Box+with+Lid',
+            link: 'https://www.printables.com/search/models?q=box%20with%20lid'
+        },
+        {
+            id: 25,
+            title: 'מגן כבל (Cable Saver)',
+            category: 'gadgets',
+            difficulty: 'קל',
+            desc: 'שומר על קצוות הכבלים של הטלפון משבירה.',
+            img: 'https://placehold.co/400x300/e2e8f0/1e293b?text=Cable+Protector',
+            link: 'https://www.printables.com/search/models?q=cable%20saver'
         }
     ];
 
@@ -172,6 +265,29 @@ const ProjectsView: React.FC<{ onNavigateToTutor: () => void }> = ({ onNavigateT
             case 'בינוני': return 2;
             case 'קשה': return 3;
             default: return 0;
+        }
+    };
+
+    const getDifficultyTooltip = (diff: string) => {
+        switch(diff) {
+            case 'קל': return 'מתאים למתחילים, לרוב ללא תמיכות, זמן הדפסה קצר.';
+            case 'בינוני': return 'דורש דיוק וכיול טוב, עשוי לדרוש תמיכות או הגדרות מיוחדות.';
+            case 'קשה': return 'גיאומטריה מורכבת, חומרים מיוחדים או מנגנונים עדינים.';
+            default: return '';
+        }
+    };
+
+    const handleShare = (project: any) => {
+        if (navigator.share) {
+            navigator.share({
+                title: project.title,
+                text: `בדוק את הפרויקט ${project.title} ב-3D Master!`,
+                url: project.link,
+            })
+            .catch((error) => console.log('Error sharing', error));
+        } else {
+            navigator.clipboard.writeText(project.link);
+            alert('הקישור הועתק ללוח!');
         }
     };
 
@@ -189,6 +305,9 @@ const ProjectsView: React.FC<{ onNavigateToTutor: () => void }> = ({ onNavigateT
         }
         if (sortOrder === 'hard') {
             return getDifficultyValue(b.difficulty) - getDifficultyValue(a.difficulty);
+        }
+        if (sortOrder === 'alpha') {
+            return a.title.localeCompare(b.title, 'he');
         }
         return 0; // Default ID sort
     });
@@ -214,11 +333,22 @@ const ProjectsView: React.FC<{ onNavigateToTutor: () => void }> = ({ onNavigateT
                         placeholder="חפש פרויקט (לדוגמה: מעמד, צעצוע...)"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full px-4 py-3 pr-12 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all text-slate-800 placeholder-slate-400"
+                        className="w-full px-4 py-3 pr-12 pl-10 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all text-slate-800 placeholder-slate-400"
                     />
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-slate-400 absolute top-3.5 right-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
+                    {searchQuery && (
+                        <button 
+                            onClick={() => setSearchQuery('')}
+                            className="absolute top-3.5 left-4 text-slate-400 hover:text-slate-600 transition-colors"
+                            aria-label="נקה חיפוש"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                    )}
                 </div>
 
                 {/* Filters and Sorting Container */}
@@ -249,42 +379,81 @@ const ProjectsView: React.FC<{ onNavigateToTutor: () => void }> = ({ onNavigateT
                             <option value="default">מומלץ</option>
                             <option value="easy">קל לקשה</option>
                             <option value="hard">קשה לקל</option>
+                            <option value="alpha">א-ת (לפי שם)</option>
                         </select>
                     </div>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {filteredProjects.map((p) => (
-                    <div key={p.id} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
-                        <div className="relative h-48 overflow-hidden bg-slate-100">
-                             <img src={p.img} alt={p.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
-                             <div className="absolute top-2 right-2 flex gap-2">
-                                <span className={`px-2 py-1 rounded-md text-xs font-bold shadow-sm ${getDifficultyColor(p.difficulty)}`}>
-                                    {p.difficulty}
-                                </span>
-                             </div>
-                        </div>
-                        <div className="p-5 flex flex-col flex-grow">
-                            <div className="mb-2">
-                                <span className="text-xs text-slate-400 font-medium">{categories.find(c => c.id === p.category)?.label}</span>
-                                <h3 className="font-bold text-lg text-slate-800">{p.title}</h3>
+                {isLoading ? (
+                    // Skeleton Loader
+                    Array.from({ length: 8 }).map((_, i) => (
+                        <div key={i} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden h-[340px] animate-pulse">
+                            <div className="h-48 bg-slate-200"></div>
+                            <div className="p-5 flex flex-col gap-3">
+                                <div className="h-4 bg-slate-200 rounded w-1/4"></div>
+                                <div className="h-6 bg-slate-200 rounded w-3/4"></div>
+                                <div className="h-4 bg-slate-200 rounded w-full"></div>
+                                <div className="h-4 bg-slate-200 rounded w-5/6"></div>
+                                <div className="h-10 bg-slate-200 rounded mt-auto"></div>
                             </div>
-                            <p className="text-sm text-slate-500 leading-relaxed mb-4 flex-grow">{p.desc}</p>
-                            <a 
-                                href={p.link} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="w-full py-2 px-4 bg-slate-50 text-blue-600 text-sm font-bold rounded-lg border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors text-center block"
-                            >
-                                הורד קובץ להדפסה
-                            </a>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    filteredProjects.map((p) => (
+                        <div key={p.id} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex flex-col relative hover:-translate-y-1">
+                            <div className="relative h-48 overflow-hidden bg-slate-100">
+                                 <img src={p.img} alt={p.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                                 
+                                 {/* Share Button */}
+                                 <button 
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleShare(p);
+                                    }}
+                                    className="absolute top-2 left-2 bg-white/90 p-2 rounded-full shadow-md text-slate-600 hover:text-blue-600 transition-colors z-20 opacity-0 group-hover:opacity-100"
+                                    title="שתף פרויקט"
+                                 >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                    </svg>
+                                 </button>
+
+                                 <div className="absolute top-2 right-2 flex gap-2 z-10">
+                                    <div className="group/tooltip relative">
+                                        <span className={`cursor-help px-2 py-1 rounded-md text-xs font-bold shadow-sm ${getDifficultyColor(p.difficulty)}`}>
+                                            {p.difficulty}
+                                        </span>
+                                        <div className="invisible group-hover/tooltip:visible opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 absolute right-0 top-full mt-2 w-48 bg-slate-800 text-white text-xs rounded p-2 shadow-lg z-20 pointer-events-none">
+                                            {getDifficultyTooltip(p.difficulty)}
+                                            {/* Little triangle arrow */}
+                                            <div className="absolute -top-1 right-3 w-2 h-2 bg-slate-800 transform rotate-45"></div>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                            <div className="p-5 flex flex-col flex-grow">
+                                <div className="mb-2">
+                                    <span className="text-xs text-slate-400 font-medium">{categories.find(c => c.id === p.category)?.label}</span>
+                                    <h3 className="font-bold text-lg text-slate-800">{p.title}</h3>
+                                </div>
+                                <p className="text-sm text-slate-500 leading-relaxed mb-4 flex-grow">{p.desc}</p>
+                                <a 
+                                    href={p.link} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="w-full py-2 px-4 bg-slate-50 text-blue-600 text-sm font-bold rounded-lg border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors text-center block"
+                                >
+                                    הורד קובץ להדפסה
+                                </a>
+                            </div>
+                        </div>
+                    ))
+                )}
             </div>
 
-            {filteredProjects.length === 0 && (
+            {!isLoading && filteredProjects.length === 0 && (
                 <div className="text-center py-16 bg-white rounded-xl border border-dashed border-slate-300">
                     <p className="text-slate-500 text-lg">לא נמצאו פרויקטים התואמים את החיפוש.</p>
                 </div>
